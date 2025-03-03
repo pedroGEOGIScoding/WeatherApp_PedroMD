@@ -1,4 +1,6 @@
 import React from 'react'
+import { useState } from "react";
+import axios from "axios";
 //import sunny from '../assets/images/sunny.png'
 import windy from '../assets/images/windy.png'
 //import cloudy from '../assets/images/cloudy.png'
@@ -6,6 +8,27 @@ import windy from '../assets/images/windy.png'
 //import snowy from '../assets/images/snowy.png'
 
 const WeatherApp = () => {
+	const [data, setData] = useState({});
+	const api_key = "c5d55baaba55e17733b413b5772c6684"
+
+	const search = async () => {
+		const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=Metric&appid=${api_key}`
+		const response = await axios.get(url);
+		const searchData = await response.json();
+		console.log(searchData)
+		setData(searchData)
+
+	}
+
+
+
+
+
+
+
+
+
+
   return (
   <div className="container">
     <div className="WeatherApp">
@@ -16,7 +39,7 @@ const WeatherApp = () => {
         </div>
         <div className="search-bar">
           <input type="text" placeholder="Enter city name" />
-          <i className="fa-solid fa-magnifying-glass"></i>
+          <i className="fa-solid fa-magnifying-glass" onClick={search}></i>
         </div>
       </div>
       <div className="weather">
